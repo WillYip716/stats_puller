@@ -4,16 +4,18 @@ const converter = require('json-2-csv');
 const fs = require('fs');
 
 const urls = [
-    "https://www.thescore.com/news/1988543",
-    "https://www.thescore.com/news/1989796",
-    "https://www.thescore.com/news/1989904",
-    "https://www.thescore.com/news/1991017"
+    "https://www.fantasypros.com/nfl/projections/qb.php?week=draft",
+    "https://www.fantasypros.com/nfl/projections/rb.php?week=draft",
+    "https://www.fantasypros.com/nfl/projections/wr.php?week=draft",
+    "https://www.fantasypros.com/nfl/projections/te.php?week=draft"
 ];
+
+
 
 const pos = ["qb", "rb", "wr", "te"];
 
 
-async function main(){
+async function fantasypros(){
     urls.forEach(async (element,mstIndex)=>{
         console.log(mstIndex);
         const html = await axios.get(element);
@@ -25,9 +27,17 @@ async function main(){
 
         $("tr").each((index,element) => {
                 if(index===0){
+                    
+                }
+                else if(index===1){
                     const field = $(element).find("th");
                     field.each((i, header)=>{
-                        headers.push($(header).text().toLowerCase());
+                        if(headers.indexOf($(header).text().toLowerCase())>-1){
+                            headers.push($(header).text().toLowerCase() + '2');
+                        }
+                        else{
+                            headers.push($(header).text().toLowerCase());
+                        } 
                     });
                 }
                 else{
@@ -47,12 +57,12 @@ async function main(){
             console.log("success");
         
             // write CSV to a file
-            fs.writeFileSync(pos[mstIndex] + '.csv', csv);
+            fs.writeFileSync('fp_' + pos[mstIndex] + '.csv', csv);
             
         });
     }) 
 }
 
-main();
+fantasypros();
 
 
