@@ -54,6 +54,6 @@ async function thescore(){
     }) 
 }
 
-thescore();
+module.exports = thescore;
 
 

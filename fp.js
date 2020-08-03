@@ -63,6 +63,6 @@ async function fantasypros(){
     }) 
 }
 
-fantasypros();
+module.exports = fantasypros;
 
 
