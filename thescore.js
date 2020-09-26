@@ -15,6 +15,7 @@ const pos = ["qb", "rb", "wr", "te"];
 
 
 async function thescore(){
+    console.log("running");
     urls.forEach(async (element,mstIndex)=>{
         console.log(mstIndex);
         const html = await axios.get(element);
@@ -53,7 +54,7 @@ async function thescore(){
         });
     }) 
 }
-
+//thescore();
 module.exports = thescore;
 
 

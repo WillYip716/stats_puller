@@ -11,6 +11,7 @@ function main(){
         const jsonObj = csvjson.toObject(fileContent);
         const data = JSON.stringify(jsonObj);
         fs.writeFileSync('avg.json', data);
+        console.log("success");
     });
 }
 
